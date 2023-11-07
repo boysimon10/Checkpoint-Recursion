@@ -1,0 +1,30 @@
+FUNCTION isPalindrome(VAR mot : STRING, gauche: INTEGER, droite: INTEGER) : BOOLEAN
+VAR
+    gauche := 0;  // Initialisation de l'indice de gauche
+    droite := mot.length - 1;  // Initialisation de l'indice de droite
+BEGIN
+    IF (mot.length <= 1) THEN
+        RETURN TRUE;  // Si la chaîne a une longueur de 1 ou moins, c'est un palindrome
+    ELSE_IF (mot[gauche] <> mot[droite]) THEN
+        RETURN FALSE;  // Si les caractères aux indices de gauche et de droite ne correspondent pas, ce n'est pas un palindrome
+    END_IF
+    RETURN isPalindrome(mot, gauche + 1, droite - 1);  // Appel récursif avec les indices mis à jour
+END
+
+ALGORITHM Palindrome
+VAR
+    mot: STRING;  // Déclaration d'une variable pour stocker la chaîne de caractères
+    gauche, droite: INTEGER;  // Déclaration de variables pour les indices gauche et droite
+    palindrome: BOOLEAN;  // Déclaration d'une variable pour stocker le résultat de la vérification
+BEGIN
+    Write("Ecrivez un mot: ")  // Invite l'utilisateur à entrer une chaîne de caractères
+    Read(mot)  // Lit la chaîne de caractères saisie par l'utilisateur
+    mot:= toUpper(mot);  // Convertit la chaîne en majuscules pour ignorer la casse
+    
+    palindrome := isPalindrome(mot, gauche, droite);  // Appelle la fonction isPalindrome pour vérifier si la chaîne est un palindrome
+    IF (palindrome) THEN
+        Write("C'est un palindrome.")  // Affiche un message si la chaîne est un palindrome
+    ELSE
+        Write("Ce n'est pas un palindrome")  // Affiche un message si la chaîne n'est pas un palindrome
+    END_IF
+END
